@@ -1,0 +1,1282 @@
+body.no-scroll {
+    overflow: hidden;
+}
+/* General Body & Root Variables */
+:root {
+    --deep-blue: #0a0f2c;
+    --neon-blue: #03a9f4;
+    --white: #ffffff;
+    --sky-blue: #87ceeb; /* Adjusted for headline contrast */
+    --purple-gradient-start: #4B0082; /* Deep violet */
+    --purple-gradient-end: #6A0DAD; /* Darker purple */
+    --resume-block-bg: #1a2240; /* Darker background for resume blocks */
+    --resume-border-color: rgba(3, 169, 244, 0.2);
+    --resume-text-color: rgba(255, 255, 255, 0.9);
+    --resume-heading-color: var(--neon-blue);
+    --resume-subheading-color: var(--white);
+    --card-bg-gradient: linear-gradient(145deg, #1a2240, #0f1530);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--white);
+    background-color: var(--deep-blue);
+    line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: none;
+    color: var(--white);
+    transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+ul {
+    list-style: none;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+}
+
+section {
+    padding: 100px 5%;
+    position: relative;
+    overflow: hidden; /* For any internal elements like particles */
+}
+
+.section-intro {
+    font-size: 1.2em;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+    text-align: center;
+    font-weight: 300;
+}
+
+/* Hero Section */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, var(--deep-blue) 0%, var(--purple-gradient-start) 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 0 5%;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+}
+
+/* Optional: Floating particles effect (simplified, can be more complex with JS) */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+/* Navbar */
+.navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    z-index: 1000;
+}
+
+.navbar .logo {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--white);
+    transition: all 0.3s ease;
+}
+
+.navbar .logo:hover {
+    color: var(--neon-blue);
+    transform: scale(1.05);
+}
+
+.navbar nav ul {
+    display: flex;
+    gap: 30px;
+}
+
+.navbar nav ul li a {
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.navbar nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: var(--neon-blue);
+    left: 0;
+    bottom: 0;
+    transition: width 0.3s ease;
+}
+
+.navbar nav ul li a:hover {
+    color: var(--neon-blue);
+}
+
+.navbar nav ul li a:hover::after {
+    width: 100%;
+}
+
+.social-icons-top {
+    display: flex;
+    gap: 20px;
+}
+
+.social-icons-top a {
+    font-size: 1.2em;
+    color: var(--white);
+    transition: all 0.3s ease;
+}
+
+.social-icons-top a:hover {
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px var(--neon-blue);
+    transform: scale(1.1);
+}
+
+/* Hamburger Menu Toggle */
+.menu-toggle {
+    display: none; /* Hidden by default on desktop */
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px; /* 3 bars of 3px + 2 gaps of 6px */
+    cursor: pointer;
+    z-index: 1001; /* Ensure it's above other elements */
+    position: relative;
+}
+
+.menu-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--white);
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hamburger menu active state (transforms into an X) */
+.menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+
+/* Hero Content */
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    z-index: 2; /* Ensure content is above particles */
+}
+
+.hero-content .text-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.hero-content h1 {
+    font-size: 4.5em; /* Large for impact */
+    margin-bottom: 10px;
+    line-height: 1.1;
+    white-space: nowrap; /* Prevent line break for name */
+}
+
+.hero-content h1 span {
+    color: var(--sky-blue);
+}
+
+.hero-content p {
+    font-size: 1.4em;
+    margin-bottom: 30px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.btn-get-connected {
+    background-color: var(--neon-blue);
+    color: var(--white);
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1em;
+    display: inline-block;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-get-connected:hover {
+    background-color: var(--deep-blue);
+    box-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-blue);
+    transform: translateY(-5px) scale(1.02);
+}
+
+.profile-image-container {
+    flex: 0 0 auto; /* Don't grow or shrink, maintain size */
+    width: 400px; /* Adjust size as needed */
+    height: 400px; /* Adjust size as needed */
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    margin-left: 50px;
+    background: linear-gradient(45deg, var(--neon-blue), var(--purple-gradient-end));
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 60px var(--neon-blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-image-container img {
+    width: 95%; /* Make image slightly smaller than container for cutout effect */
+    height: 95%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border: 5px solid rgba(255, 255, 255, 0.1); /* Inner border for depth */
+    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Added transition */
+}
+
+.profile-image-container img:hover {
+    transform: scale(1.02); /* Slight zoom */
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.6), 0 0 80px var(--neon-blue); /* More prominent glow */
+}
+
+
+/* Highlight Cards Section */
+.highlight-cards-section {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 30px;
+    background-color: var(--deep-blue); /* Ensure consistent background */
+    padding: 80px 5%;
+}
+
+.highlight-cards-section .card {
+    background: var(--card-bg-gradient); /* Soft blue gradients */
+    border-radius: 15px;
+    padding: 40px 30px;
+    text-align: center;
+    flex: 1;
+    min-width: 280px; /* Minimum width for cards */
+    max-width: 350px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(3, 169, 244, 0.2); /* Subtle neon blue border */
+}
+
+.highlight-cards-section .card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(3,169,244,0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 0;
+}
+
+.highlight-cards-section .card:hover::before {
+    opacity: 1;
+}
+
+
+.highlight-cards-section .card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px var(--neon-blue);
+    border-color: var(--neon-blue);
+}
+
+.highlight-cards-section .card i {
+    font-size: 3.5em;
+    color: var(--neon-blue);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.highlight-cards-section .card i:hover {
+    color: var(--sky-blue);
+    transform: scale(1.05);
+}
+
+.highlight-cards-section .card h3 {
+    font-size: 1.5em;
+    color: var(--white);
+    position: relative;
+    z-index: 1;
+}
+
+
+/* About Me Section - Now acts as a Resume/Detailed Profile */
+.about-me-section {
+    background-color: var(--deep-blue);
+    text-align: center;
+    padding: 100px 5%;
+}
+
+.about-me-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 60px;
+    color: var(--white);
+    text-align: center;
+}
+
+/* Resume Container - Two Columns */
+.resume-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows columns to stack on smaller screens */
+    gap: 40px; /* Space between columns */
+    justify-content: center;
+    max-width: 1300px; /* Max width for the resume content */
+    margin: 0 auto;
+    text-align: left; /* Align text within columns */
+}
+
+.resume-left-column,
+.resume-right-column {
+    flex: 1; /* Both columns take equal space initially */
+    min-width: 300px; /* Minimum width for each column before wrapping */
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Space between blocks within a column */
+}
+
+/* Individual Resume Blocks */
+.resume-block {
+    background: linear-gradient(160deg, var(--resume-block-bg), #0f1530);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--resume-border-color);
+    line-height: 1.6;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.resume-block:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(3, 169, 244, 0.3);
+}
+
+.resume-block h3 {
+    font-size: 1.4em;
+    color: var(--resume-heading-color);
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    letter-spacing: 1px;
+}
+
+.resume-block h4 {
+    font-size: 1.15em;
+    color: var(--resume-subheading-color);
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.resume-block p,
+.resume-block li {
+    font-size: 0.95em;
+    color: var(--resume-text-color);
+    margin-bottom: 8px;
+}
+
+.resume-block p strong {
+    color: var(--neon-blue);
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.resume-block ul {
+    margin-left: 20px;
+    list-style: disc; /* Use discs for list items */
+}
+
+.resume-block ul li {
+    margin-bottom: 5px;
+}
+
+/* Specific styling for links within resume blocks */
+.resume-block a {
+    color: var(--sky-blue);
+    text-decoration: underline;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.resume-block a:hover {
+    color: var(--neon-blue);
+    text-decoration: none;
+    text-shadow: 0 0 5px rgba(3, 169, 244, 0.5);
+}
+
+/* Download CV button specific for this section */
+.btn-download-cv {
+    background-color: var(--neon-blue);
+    color: var(--white);
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1em;
+    display: inline-block; /* Changed from block to inline-block for better placement */
+    margin-top: 30px;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-download-cv:hover {
+    background-color: var(--deep-blue);
+    box-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-blue);
+    transform: translateY(-5px) scale(1.02);
+}
+
+/* Experience Metrics Section */
+.experience-metrics-section {
+    background: linear-gradient(to right, #0d1236, #1a2240);
+    padding: 100px 5%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.metric-block {
+    background: linear-gradient(135deg, #0a0f2c, #1a2240); /* Base dark gradient */
+    border-radius: 15px;
+    padding: 30px 40px;
+    text-align: center;
+    min-width: 200px;
+    flex: 1;
+    max-width: 280px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s ease;
+}
+
+/* Glowing effect for metric blocks */
+.metric-block::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, var(--neon-blue), var(--purple-gradient-end));
+    z-index: -1;
+    filter: blur(20px); /* Adjust blur for glow intensity */
+    opacity: 0.6;
+    transition: opacity 0.5s ease;
+}
+
+.metric-block:hover::before {
+    opacity: 1;
+    filter: blur(25px);
+}
+
+.metric-block h3 {
+    font-size: 3em;
+    color: var(--neon-blue);
+    margin-bottom: 10px;
+    font-weight: 700;
+    transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+.metric-block h3:hover {
+    color: var(--sky-blue);
+    transform: scale(1.05);
+    text-shadow: 0 0 10px rgba(3, 169, 244, 0.5);
+}
+
+.metric-block p {
+    font-size: 1.1em;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 300;
+}
+
+/* Skills Section */
+.skills-section {
+    background-color: var(--deep-blue);
+    padding: 100px 5%;
+    text-align: center;
+}
+
+.skills-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 60px;
+    color: var(--white);
+}
+
+.skills-content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping */
+    gap: 50px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.skill-column {
+    flex: 1;
+    min-width: 300px; /* Min width for each column */
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.skill-bar {
+    text-align: left;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Added transition */
+    padding: 15px; /* Added padding to make hover area larger */
+    border-radius: 10px; /* Match progress container */
+}
+
+.skill-bar:hover {
+    background-color: rgba(3, 169, 244, 0.1); /* Subtle background on hover */
+    box-shadow: 0 0 15px rgba(3, 169, 244, 0.3); /* Soft glow on hover */
+}
+
+.skill-bar p {
+    font-size: 1.2em;
+    color: var(--white);
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.progress-container {
+    background-color: #1a2240; /* Darker background for the bar track */
+    border-radius: 10px;
+    height: 15px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(to right, var(--neon-blue), var(--purple-gradient-end));
+    border-radius: 10px;
+    width: 0%; /* Initial width for animation */
+    transition: width 1.5s ease-out; /* Animation */
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%); /* Subtle glow effect */
+    opacity: 0;
+    animation: pulseGlow 2s infinite alternate; /* Simple pulsating glow */
+}
+
+
+.skill-bar span {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--white);
+    font-size: 0.9em;
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 1; /* Ensure percentage is above glow */
+}
+
+/* Keyframe for glowing effect */
+@keyframes pulseGlow {
+    0% { opacity: 0; }
+    100% { opacity: 0.5; }
+}
+
+
+/* Footer (Simple) */
+footer {
+    background-color: #05081f;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 0.9em;
+}
+
+/* Services Section */
+.services-section {
+    background-color: var(--deep-blue);
+    padding: 100px 5%;
+    text-align: center;
+}
+
+.services-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: var(--white);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.service-card {
+    background: var(--card-bg-gradient);
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(3, 169, 244, 0.2);
+    transition: all 0.4s ease;
+    text-align: center;
+}
+
+.service-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px var(--neon-blue);
+    border-color: var(--neon-blue);
+}
+
+.service-card i {
+    font-size: 3em;
+    color: var(--neon-blue);
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+}
+
+.service-card:hover i {
+    color: var(--sky-blue);
+}
+
+.service-card h3 {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    color: var(--white);
+}
+
+.service-card p {
+    font-size: 0.95em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Portfolio Section */
+.portfolio-section {
+    background-color: var(--deep-blue);
+    padding: 100px 5%;
+    text-align: center;
+}
+
+.portfolio-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: var(--white);
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.portfolio-item {
+    background: var(--card-bg-gradient);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(3, 169, 244, 0.2);
+    transition: all 0.4s ease;
+    text-align: left;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px var(--neon-blue);
+    border-color: var(--neon-blue);
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 220px; /* Fixed height for images */
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.05);
+}
+
+.portfolio-item .item-info {
+    padding: 25px;
+}
+
+.portfolio-item h3 {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    color: var(--white);
+}
+
+.portfolio-item p {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 10px;
+}
+
+.portfolio-item .tech-stack {
+    font-size: 0.85em;
+    color: var(--sky-blue);
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.portfolio-item .item-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.portfolio-item .btn-link {
+    background-color: rgba(3, 169, 244, 0.2);
+    color: var(--neon-blue);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.portfolio-item .btn-link:hover {
+    background-color: var(--neon-blue);
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Blog Section */
+.blog-section {
+    background-color: var(--deep-blue);
+    padding: 100px 5%;
+    text-align: center;
+}
+
+.blog-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: var(--white);
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.blog-post-card {
+    background: var(--card-bg-gradient);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(3, 169, 244, 0.2);
+    transition: all 0.4s ease;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push button to bottom */
+}
+
+.blog-post-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px var(--neon-blue);
+    border-color: var(--neon-blue);
+}
+
+.blog-post-card h3 {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    color: var(--white);
+}
+
+.blog-post-card .post-meta {
+    font-size: 0.85em;
+    color: var(--sky-blue);
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.blog-post-card p {
+    font-size: 0.95em;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px;
+    flex-grow: 1; /* Allow content to grow */
+}
+
+.blog-post-card .btn-read-more {
+    background-color: rgba(3, 169, 244, 0.2);
+    color: var(--neon-blue);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: auto; /* Push to bottom */
+}
+
+.blog-post-card .btn-read-more:hover {
+    background-color: var(--neon-blue);
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Contact Section */
+.contact-section {
+    background-color: var(--deep-blue);
+    padding: 100px 5%;
+    text-align: center;
+}
+
+.contact-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: var(--white);
+}
+
+.contact-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.contact-info-details {
+    flex: 1;
+    min-width: 300px;
+    background: var(--card-bg-gradient);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(3, 169, 244, 0.2);
+    transition: all 0.4s ease;
+}
+
+.contact-info-details:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(3, 169, 244, 0.3);
+}
+
+.contact-info-details h3 {
+    font-size: 1.5em;
+    color: var(--neon-blue);
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-info-details p {
+    font-size: 1.05em;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-info-details p i {
+    color: var(--sky-blue);
+    font-size: 1.2em;
+}
+
+.contact-info-details p a {
+    color: var(--sky-blue);
+    text-decoration: underline;
+}
+
+.contact-info-details p a:hover {
+    color: var(--neon-blue);
+    text-decoration: none;
+    text-shadow: 0 0 5px rgba(3, 169, 244, 0.5);
+}
+
+.social-icons-contact {
+    margin-top: 30px;
+    display: flex;
+    gap: 25px;
+    justify-content: center; /* Center icons if column is narrow */
+}
+
+.social-icons-contact a {
+    font-size: 1.8em;
+    color: var(--white);
+    transition: all 0.3s ease;
+}
+
+.social-icons-contact a:hover {
+    color: var(--neon-blue);
+    text-shadow: 0 0 15px var(--neon-blue);
+    transform: scale(1.15);
+}
+
+.contact-form {
+    flex: 1.5; /* Give more space to the form */
+    min-width: 300px;
+    background: var(--card-bg-gradient);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(3, 169, 244, 0.2);
+    transition: all 0.4s ease;
+}
+
+.contact-form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(3, 169, 244, 0.3);
+}
+
+.contact-form h3 {
+    font-size: 1.5em;
+    color: var(--neon-blue);
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1em;
+    color: var(--white);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #0f1530;
+    border: 1px solid rgba(3, 169, 244, 0.3);
+    border-radius: 8px;
+    color: var(--white);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 10px rgba(3, 169, 244, 0.5);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.btn-send-message {
+    background-color: var(--neon-blue);
+    color: var(--white);
+    padding: 15px 40px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: auto; /* Allow button to size based on content */
+    display: inline-block; /* For centering */
+}
+
+.btn-send-message:hover {
+    background-color: var(--deep-blue);
+    box-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-blue);
+    transform: translateY(-5px) scale(1.02);
+}
+
+.form-message {
+    margin-top: 20px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.95em;
+    font-weight: 500;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    color: var(--white);
+    background-color: rgba(3, 169, 244, 0.2); /* Default for success/info */
+    border: 1px solid var(--neon-blue);
+}
+
+.form-message.show {
+    opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 50px;
+    }
+
+    .hero-content .text-content {
+        max-width: 100%;
+    }
+
+    .hero-content h1 {
+        font-size: 3.5em;
+    }
+
+    .profile-image-container {
+        margin-left: 0;
+        width: 300px;
+        height: 300px;
+    }
+
+    .about-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .skills-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .skill-column {
+        min-width: unset; /* Remove min-width to allow shrinking */
+        width: 100%;
+        max-width: 450px; /* Limit width on smaller screens */
+    }
+
+    .resume-container,
+    .contact-content {
+        flex-direction: column; /* Stack columns on smaller screens */
+        align-items: center;
+    }
+    .resume-left-column,
+    .resume-right-column,
+    .contact-info-details,
+    .contact-form {
+        width: 100%;
+        max-width: 700px; /* Limit width of stacked columns/blocks */
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap; /* Allow items to wrap */
+        justify-content: space-between; /* Space out logo and toggle */
+        padding: 20px 5%;
+    }
+
+    .navbar .logo {
+        font-size: 1.6em;
+        margin-right: auto; /* Push logo to left */
+    }
+
+    .navbar .social-icons-top {
+        display: none; /* Hide social icons on small screens, or move them to mobile menu */
+    }
+
+    .navbar .nav-menu {
+        /* Mobile Menu styles */
+        display: flex; /* Always flex for positioning */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 70px; /* Below navbar */
+        left: 0;
+        background-color: var(--deep-blue); /* Same as body background */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        max-height: 0; /* Hidden by default */
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+        padding: 0 5%; /* No padding when closed */
+    }
+
+    .navbar .nav-menu.active {
+        max-height: 300px; /* Adjust as needed to fit all links */
+        padding: 20px 5%; /* Add padding when open */
+    }
+
+    .navbar nav ul {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px; /* Space between links */
+        align-items: flex-start; /* Align links to the left within the menu */
+    }
+
+    .navbar nav ul li {
+        width: 100%; /* Make list items take full width */
+    }
+
+    .navbar nav ul li a {
+        font-size: 1.1em; /* Readable font size for mobile links */
+        padding: 10px 0; /* Add padding for touch targets */
+        display: block; /* Make the whole area clickable */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Subtle separator */
+    }
+
+    .navbar nav ul li:last-child a {
+        border-bottom: none; /* No border for last item */
+    }
+
+    .menu-toggle {
+        display: flex; /* Show hamburger icon on mobile */
+    }
+
+    .hero-content h1 {
+        font-size: 2.8em;
+    }
+
+    .hero-content p {
+        font-size: 1.2em;
+    }
+
+    .btn-get-connected, .btn-download-cv, .btn-send-message {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+
+    .highlight-cards-section .card {
+        min-width: 90%; /* Allow cards to take more width */
+    }
+
+    .experience-metrics-section .metric-block {
+        min-width: 45%; /* Two blocks per row */
+        max-width: unset;
+    }
+
+    .about-me-section h2, .skills-section h2,
+    .services-section h2, .portfolio-section h2,
+    .blog-section h2, .contact-section h2 {
+        font-size: 2em;
+    }
+
+    section {
+        padding: 70px 5%; /* Reduce general padding */
+    }
+
+    .resume-block h3 {
+        font-size: 1.2em;
+    }
+    .resume-block h4 {
+        font-size: 1em;
+    }
+    .resume-block p, .resume-block li {
+        font-size: 0.9em;
+    }
+
+    .services-grid, .portfolio-grid, .blog-grid {
+        grid-template-columns: 1fr; /* Single column on small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 15px 3%; /* Adjusted padding for very small screens */
+    }
+
+    .navbar .logo {
+        font-size: 1.4em;
+    }
+
+    .navbar .nav-menu.active {
+        top: 60px; /* Adjust top position for smaller navbar */
+    }
+
+    .hero-content h1 {
+        font-size: 2.2em;
+    }
+
+    .hero-content p {
+        font-size: 1em;
+    }
+
+    .profile-image-container {
+        width: 250px;
+        height: 250px;
+    }
+
+    .experience-metrics-section .metric-block {
+        min-width: 80%; /* One block per row */
+    }
+
+    .resume-block {
+        padding: 20px;
+    }
+
+    .service-card, .portfolio-item, .blog-post-card, .contact-info-details, .contact-form {
+        padding: 25px;
+    }
+}
